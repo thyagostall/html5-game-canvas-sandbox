@@ -1,4 +1,4 @@
-(function() {
+function Pong() {
     "use strict"
     var version = 'v0.0.1';
 
@@ -8,7 +8,7 @@
     var player, ai, ball;
 
     var bgImageReady = false;
-    var bgImageSrc = 'pong/img/background.png';
+    var bgImageSrc = 'img/background.png';
     var bgImage;
 
     player = {
@@ -18,7 +18,7 @@
         height: 100,
 
         imageReady: false,
-        imageSrc: 'pong/img/paddle.png',
+        imageSrc: 'img/paddle.png',
         image: null,
 
         update: function() {
@@ -44,7 +44,7 @@
         height: 100,
 
         imageReady: false,
-        imageSrc: 'pong/img/paddle.png',
+        imageSrc: 'img/paddle.png',
         image: null,
 
         update: function() {
@@ -69,7 +69,7 @@
         velocity: null,
 
         imageReady: false,
-        imageSrc: 'pong/img/ball.png',
+        imageSrc: 'img/ball.png',
         image: null,
 
         serve: function(side) {
@@ -126,32 +126,6 @@
                 context.drawImage(this.image, this.x, this.y);
             }
         }
-    }
-
-    function main() {
-        canvas = document.createElement("canvas");
-        canvas.width = WIDTH;
-        canvas.height = HEIGHT;
-        context = canvas.getContext("2d");
-        document.body.appendChild(canvas);
-
-        keystate = {};
-        document.addEventListener("keydown", function(evt) {
-            keystate[evt.keyCode] = true;
-        });
-        document.addEventListener("keyup", function(evt) {
-            delete keystate[evt.keyCode];
-        });
-
-        init();
-
-        var loop = function() {
-            update();
-            draw();
-
-            window.requestAnimationFrame(loop, canvas);
-        };
-        window.requestAnimationFrame(loop, canvas);
     }
 
     function init() {
@@ -213,5 +187,33 @@
         context.restore();
     }
 
-    main();
-})();
+    this.startGame = function(elementId, directory) {
+        canvas = document.getElementById(elementId);
+        canvas.width = WIDTH;
+        canvas.height = HEIGHT;
+        context = canvas.getContext("2d");
+
+        keystate = {};
+        document.addEventListener("keydown", function(evt) {
+            keystate[evt.keyCode] = true;
+        });
+        document.addEventListener("keyup", function(evt) {
+            delete keystate[evt.keyCode];
+        });
+
+        init();
+
+        bgImageSrc = directory + bgImageSrc;
+        player.imageSrc = directory + player.imageSrc;
+        ai.imageSrc = directory + ai.imageSrc;
+        ball.imageSrc = directory + ball.imageSrc;
+
+        var loop = function() {
+            update();
+            draw();
+
+            window.requestAnimationFrame(loop, canvas);
+        };
+        window.requestAnimationFrame(loop, canvas);
+    }
+};
