@@ -1,6 +1,6 @@
 function Pong() {
     "use strict"
-    var version = 'v0.0.2';
+    var version = 'v0.0.3';
 
     var WIDTH = 800, HEIGHT = 600, PI = Math.PI;
     var upArrow = 38, downArrow = 40;
@@ -200,6 +200,11 @@ function Pong() {
         document.addEventListener("keyup", function(evt) {
             delete keystate[evt.keyCode];
         });
+        window.addEventListener("keydown", function(e) {
+            if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+                e.preventDefault();
+            }
+        }, false);
 
         init();
 
