@@ -23,9 +23,9 @@ function Pong() {
 
         update: function() {
             if (keystate[upArrow])
-                this.y -= 7;
+                this.y -= 14;
             if (keystate[downArrow])
-                this.y += 7;
+                this.y += 14;
 
             this.y = Math.max(Math.min(this.y, HEIGHT - this.height), 0);
         },
@@ -65,7 +65,7 @@ function Pong() {
         x: null,
         y: null,
         side: 20,
-        speed: 5,
+        speed: 12,
         velocity: null,
 
         imageReady: false,
@@ -200,9 +200,9 @@ function Pong() {
         document.addEventListener("keyup", function(evt) {
             delete keystate[evt.keyCode];
         });
-        window.addEventListener("keydown", function(e) {
-            if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
-                e.preventDefault();
+        window.addEventListener("keydown", function(evt) {
+            if ([32, 37, 38, 39, 40].indexOf(evt.keyCode) > -1) {
+                evt.preventDefault();
             }
         }, false);
 
