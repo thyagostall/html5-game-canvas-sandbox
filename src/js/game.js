@@ -1,5 +1,5 @@
 function Pong() {
-    "use strict"
+    "use strict";
     var version = 'v0.0.3';
 
     var WIDTH = 800, HEIGHT = 600, PI = Math.PI;
@@ -35,7 +35,7 @@ function Pong() {
                 context.drawImage(this.image, this.x, this.y);
             }
         }
-    }
+    };
 
     ai = {
         x: null,
@@ -59,7 +59,7 @@ function Pong() {
                 context.drawImage(this.image, this.x, this.y);
             }
         }
-    }
+    };
 
     ball = {
         x: null,
@@ -81,7 +81,7 @@ function Pong() {
             this.velocity = {
                 x: side * this.speed * Math.cos(phi),
                 y: this.speed * Math.sin(phi)
-            }
+            };
         },
 
         update: function() {
@@ -102,7 +102,7 @@ function Pong() {
                     bx < ax + aw &&
                     by < ay + ah;
                 return result;
-            }
+            };
 
             var paddle = this.velocity.x < 0 ? player : ai;
 
@@ -126,13 +126,13 @@ function Pong() {
                 context.drawImage(this.image, this.x, this.y);
             }
         }
-    }
+    };
 
     function init() {
         bgImage = new Image();
         bgImage.onload = function() {
             bgImageReady = true;
-        }
+        };
         bgImage.src = bgImageSrc;
 
         player.image = new Image();
@@ -143,7 +143,7 @@ function Pong() {
 
             player.x = player.width;
             player.y = (HEIGHT - player.height) / 2;
-        }
+        };
         player.image.src = player.imageSrc;
 
         ai.image = new Image();
@@ -154,14 +154,14 @@ function Pong() {
 
             ai.x = WIDTH - 2 * ai.width;
             ai.y = (HEIGHT - player.height) / 2;
-        }
+        };
         ai.image.src = ai.imageSrc;
 
         ball.image = new Image();
         ball.image.onload = function() {
             ball.imageReady = true;
             ball.side = ball.image.width;
-        }
+        };
         ball.image.src = ball.imageSrc;
 
         ball.serve(1);
@@ -220,5 +220,5 @@ function Pong() {
             window.requestAnimationFrame(loop, canvas);
         };
         window.requestAnimationFrame(loop, canvas);
-    }
-};
+    };
+}
