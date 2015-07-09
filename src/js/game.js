@@ -1,6 +1,6 @@
 function Pong() {
     "use strict";
-    var version = 'v0.0.3';
+    var version = 'v0.0.4';
 
     var WIDTH = 800, HEIGHT = 600, PI = Math.PI;
     var upArrow = 38, downArrow = 40;
