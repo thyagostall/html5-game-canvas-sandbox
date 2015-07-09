@@ -1,6 +1,6 @@
 function Pong() {
-    "use strict"
-    var version = 'v0.0.3';
+    "use strict";
+    var version = 'v0.0.4';
 
     var WIDTH = 800, HEIGHT = 600, PI = Math.PI;
     var upArrow = 38, downArrow = 40;
@@ -23,9 +23,9 @@ function Pong() {
 
         update: function() {
             if (keystate[upArrow])
-                this.y -= 7;
+                this.y -= 14;
             if (keystate[downArrow])
-                this.y += 7;
+                this.y += 14;
 
             this.y = Math.max(Math.min(this.y, HEIGHT - this.height), 0);
         },
@@ -35,7 +35,7 @@ function Pong() {
                 context.drawImage(this.image, this.x, this.y);
             }
         }
-    }
+    };
 
     ai = {
         x: null,
@@ -59,13 +59,13 @@ function Pong() {
                 context.drawImage(this.image, this.x, this.y);
             }
         }
-    }
+    };
 
     ball = {
         x: null,
         y: null,
         side: 20,
-        speed: 5,
+        speed: 12,
         velocity: null,
 
         imageReady: false,
@@ -81,7 +81,7 @@ function Pong() {
             this.velocity = {
                 x: side * this.speed * Math.cos(phi),
                 y: this.speed * Math.sin(phi)
-            }
+            };
         },
 
         update: function() {
@@ -102,7 +102,7 @@ function Pong() {
                     bx < ax + aw &&
                     by < ay + ah;
                 return result;
-            }
+            };
 
             var paddle = this.velocity.x < 0 ? player : ai;
 
@@ -126,13 +126,13 @@ function Pong() {
                 context.drawImage(this.image, this.x, this.y);
             }
         }
-    }
+    };
 
     function init() {
         bgImage = new Image();
         bgImage.onload = function() {
             bgImageReady = true;
-        }
+        };
         bgImage.src = bgImageSrc;
 
         player.image = new Image();
@@ -143,7 +143,7 @@ function Pong() {
 
             player.x = player.width;
             player.y = (HEIGHT - player.height) / 2;
-        }
+        };
         player.image.src = player.imageSrc;
 
         ai.image = new Image();
@@ -154,14 +154,14 @@ function Pong() {
 
             ai.x = WIDTH - 2 * ai.width;
             ai.y = (HEIGHT - player.height) / 2;
-        }
+        };
         ai.image.src = ai.imageSrc;
 
         ball.image = new Image();
         ball.image.onload = function() {
             ball.imageReady = true;
             ball.side = ball.image.width;
-        }
+        };
         ball.image.src = ball.imageSrc;
 
         ball.serve(1);
@@ -200,9 +200,9 @@ function Pong() {
         document.addEventListener("keyup", function(evt) {
             delete keystate[evt.keyCode];
         });
-        window.addEventListener("keydown", function(e) {
-            if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
-                e.preventDefault();
+        window.addEventListener("keydown", function(evt) {
+            if ([32, 37, 38, 39, 40].indexOf(evt.keyCode) > -1) {
+                evt.preventDefault();
             }
         }, false);
 
@@ -220,5 +220,5 @@ function Pong() {
             window.requestAnimationFrame(loop, canvas);
         };
         window.requestAnimationFrame(loop, canvas);
-    }
-};
+    };
+}
