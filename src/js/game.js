@@ -1,6 +1,6 @@
 function Pong() {
     "use strict";
-    var version = 'v0.1.0';
+    var version = 'v0.1.1';
 
     var WIDTH = 800, HEIGHT = 600, PI = Math.PI;
     var upArrow = 38, downArrow = 40;
@@ -65,7 +65,7 @@ function Pong() {
                 context.drawImage(this.image, this.x, this.y);
             }
 
-            var score = this.score
+            var score = this.score;
             context.fillText(score, WIDTH / 2 + 60 - context.measureText(score).width, 38);
         }
     };
