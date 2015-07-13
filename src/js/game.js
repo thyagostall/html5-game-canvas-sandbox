@@ -65,7 +65,7 @@ function Pong() {
                 context.drawImage(this.image, this.x, this.y);
             }
 
-            var score = this.score
+            var score = this.score;
             context.fillText(score, WIDTH / 2 + 60 - context.measureText(score).width, 38);
         }
     };
