@@ -1,6 +1,6 @@
 function Pong() {
     "use strict";
-    var version = 'v0.0.4';
+    var version = 'v0.1.0';
 
     var WIDTH = 800, HEIGHT = 600, PI = Math.PI;
     var upArrow = 38, downArrow = 40;
@@ -11,11 +11,14 @@ function Pong() {
     var bgImageSrc = 'img/background.png';
     var bgImage;
 
+    var lost = false;
+
     player = {
         x: null,
         y: null,
         width: 20,
         height: 100,
+        score: 0,
 
         imageReady: false,
         imageSrc: 'img/paddle.png',
@@ -34,6 +37,8 @@ function Pong() {
             if (this.imageReady) {
                 context.drawImage(this.image, this.x, this.y);
             }
+
+            context.fillText(this.score, WIDTH / 2 - 60, 38);
         }
     };
 
@@ -42,6 +47,7 @@ function Pong() {
         y: null,
         width: 20,
         height: 100,
+        score: 0,
 
         imageReady: false,
         imageSrc: 'img/paddle.png',
@@ -58,6 +64,9 @@ function Pong() {
             if (this.imageReady) {
                 context.drawImage(this.image, this.x, this.y);
             }
+
+            var score = this.score
+            context.fillText(score, WIDTH / 2 + 60 - context.measureText(score).width, 38);
         }
     };
 
@@ -74,7 +83,7 @@ function Pong() {
 
         serve: function(side) {
             var r = Math.random();
-            this.x = side === 1 ? player.x + player.width: ai.x - this.side;
+            this.x = side === 1 ? player.x + player.width : ai.x - this.side;
             this.y = (HEIGHT - this.side) * r;
 
             var phi = 0.1 * PI * (1 - 2 * r);
@@ -116,8 +125,26 @@ function Pong() {
                 this.velocity.y = smash * this.speed * Math.sin(phi);
             }
 
+            //lost
             if (this.x + this.side < 0 || this.x > WIDTH) {
-                this.serve(paddle === player ? 1 : -1);
+                var ball = this;
+
+                if (!lost) {
+                    lost = true;
+                    setTimeout(function() {
+                        var winner = null;
+
+                        if (paddle === player) {
+                            winner = ai;
+                        } else {
+                            winner = player;
+                        }
+
+                        ball.serve(paddle === player ? 1 : -1);
+                        winner.score += 1;
+                        lost = false;
+                    }, 2000);
+                }
             }
         },
 
@@ -174,6 +201,9 @@ function Pong() {
     }
 
     function draw() {
+        context.font = '32px Cambria';
+        context.fillStyle = '#ff6';
+
         if (bgImageReady) {
             context.drawImage(bgImage, 0, 0);
         }
