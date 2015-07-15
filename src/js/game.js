@@ -54,10 +54,21 @@ function Pong() {
         image: null,
 
         update: function() {
-            var dest_y = ball.y - (this.height + ball.side) * 0.5;
-            this.y += (dest_y - this.y) * 0.1;
+            if (ball.isInCourt()) {
+                var dest_y = ball.y - (this.height + ball.side) * 0.5;
+                this.y += (dest_y - this.y) * 0.1;
 
-            this.y = Math.max(Math.min(this.y, HEIGHT - this.height), 0);
+                this.y = Math.max(Math.min(this.y, HEIGHT - this.height), 0);
+            } else {
+                var halfHeight = (HEIGHT - this.height) / 2;
+                var delta = 10;
+
+                if (this.y > halfHeight + delta) {
+                    this.y -= 7;
+                } else if (this.y < halfHeight - delta) {
+                    this.y += 7;
+                }
+            }
         },
 
         draw: function() {
@@ -152,6 +163,10 @@ function Pong() {
             if (this.imageReady) {
                 context.drawImage(this.image, this.x, this.y);
             }
+        },
+
+        isInCourt: function() {
+            return (this.x >= 0 && this.x <= WIDTH && this.y >= 0 && this.y <= HEIGHT);
         }
     };
 
