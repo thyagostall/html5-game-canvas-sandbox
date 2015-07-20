@@ -10,19 +10,27 @@ Just use the UP and DOWN keys. Touch still not supported.
 
 #Building
 
-To build this project you need to have **gulp.js** installed. The run the building
-process:
+To build this project you need to have **gulp.js** installed. Along with the **gulp**
+it is necessary to install some additional plugins.
+
+To install them, execute the following commands:
+
+    npm install gulp-jshint --save-dev
+    npm install gulp-changed --save-dev
+    npm install gulp-imagemin --save-dev
+    npm install gulp-strip-debug --save-dev
+    npm install gulp-uglify --save-dev
+
+To run the building process:
 
     gulp
 
 It will run **jshint** on the source code, compress the images and compress the
 JavaScript code.
 
-#Installing
-
-Just copy the content of the **dist** directory.
-
 #Embedding
+
+Copy the content of the **dist** directory.
 
 Include **game.js** script in your web page and create a **canvas** element.
 After that, create a **Pong** object and call the **startGame** method. See
