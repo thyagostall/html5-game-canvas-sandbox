@@ -1,5 +1,5 @@
 var gulp = require('gulp');
-
+var connect = require('gulp-connect');
 var jshint = require('gulp-jshint');
 
 gulp.task('jshint', function() {
@@ -30,5 +30,11 @@ gulp.task('scripts', function() {
         .pipe(uglify())
         .pipe(gulp.dest('./dist/js'));
 });
+
+gulp.task('server', function() {
+    connect.server({
+        https: true
+    });
+}); 
 
 gulp.task('default', ['jshint', 'imagemin', 'scripts']);

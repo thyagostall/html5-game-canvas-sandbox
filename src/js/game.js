@@ -1,14 +1,16 @@
 function Pong() {
     "use strict";
-    var version = 'v0.1.1';
+    var version = 'v0.1.2';
 
     var WIDTH = 800, HEIGHT = 600, PI = Math.PI;
     var upArrow = 38, downArrow = 40;
     var canvas, context, keystate;
     var player, ai, ball;
 
+    var imgDirectory = 'https://s3-us-west-2.amazonaws.com/thyago-blog/pong/img/';
+
     var bgImageReady = false;
-    var bgImageSrc = 'img/background.png';
+    var bgImageSrc = imgDirectory + 'background.png';
     var bgImage;
 
     var lost = false;
@@ -21,7 +23,7 @@ function Pong() {
         score: 0,
 
         imageReady: false,
-        imageSrc: 'img/paddle.png',
+        imageSrc: imgDirectory + 'paddle.png',
         image: null,
 
         update: function() {
@@ -50,7 +52,7 @@ function Pong() {
         score: 0,
 
         imageReady: false,
-        imageSrc: 'img/paddle.png',
+        imageSrc: imgDirectory + 'paddle.png',
         image: null,
 
         update: function() {
@@ -89,7 +91,7 @@ function Pong() {
         velocity: null,
 
         imageReady: false,
-        imageSrc: 'img/ball.png',
+        imageSrc: imgDirectory + 'ball.png',
         image: null,
 
         serve: function(side) {
