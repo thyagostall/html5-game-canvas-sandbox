@@ -36,14 +36,14 @@ Include **game.js** script in your web page and create a **canvas** element.
 After that, create a **Pong** object and call the **startGame** method. See
 the example below:
 
-{% highlight html %}
-    <script type="text/javascript" src="js/game.js"></script>
+```html
+<script type="text/javascript" src="js/game.js"></script>
 
-    <script type="text/javascript">
-        game = new Pong();
-        game.startGame("game-canvas", "");
-    </script>
-{% endhighlight %}
+<script type="text/javascript">
+    game = new Pong();
+    game.startGame("game-canvas", "");
+</script>
+```
 
 The first parameter of the **startGame** method is the id of the canvas being used.
 The second parameter is the directory where the source and images of the game are.
